@@ -29,6 +29,11 @@ document.addEventListener('DOMContentLoaded', () => {
    };
 
    let score = 0;
+   let bestScore = localStorage.getItem('bestScore') || 0;
+   const resultElement = document.querySelector('.result');
+   const bestScoreElement = document.querySelector('.result.best');
+
+   bestScoreElement.innerHTML = `Ваш рекорд: ${bestScore}`;
 
    const playKeySound = () => {
       const audio = document.querySelector('#keypress');
@@ -42,14 +47,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const keyElement = document.getElementById(keyPressed);
       const highlightKey = document.querySelector('.selected');
-      const result = document.querySelector('.result');
 
       if (!keyElement) {
          console.error(`Key element with id ${keyPressed} not found`);
          return;
       }
 
-      playKeySound(); // Play the sound here
+      playKeySound();
       keyElement.classList.add('hit');
 
       const handleAnimationEnd = () => {
@@ -62,7 +66,14 @@ document.addEventListener('DOMContentLoaded', () => {
             score = 0;
          }
 
-         result.innerHTML = `Очки ${score}`;
+         resultElement.innerHTML = `Очки: ${score}`;
+
+         if (score > bestScore) {
+            bestScore = score;
+            bestScoreElement.innerHTML = `Ваш рекорд: ${bestScore}`;
+            localStorage.setItem('bestScore', bestScore);
+         }
+
          if (highlightKey) {
             highlightKey.classList.remove('selected');
          }
