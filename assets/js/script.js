@@ -1,4 +1,23 @@
 document.addEventListener('DOMContentLoaded', () => {
+   const easyModeBtn = document.querySelector('#easy-mode'),
+      hardModeBtn = document.querySelector('#hard-mode'),
+      screens = document.querySelectorAll('.screen');
+   // backBtn = document.querySelector('.back');
+
+   easyModeBtn.addEventListener('click', () => {
+      toggleScreen(screens[0], screens[1]);
+      startGame(false); // false means no time limit
+   });
+
+   hardModeBtn.addEventListener('click', () => {
+      toggleScreen(screens[0], screens[1]);
+      startGame(true); // true means time limit
+   });
+
+   // backBtn.addEventListener('click', () => {
+   //    toggleScreen(screens[1], screens[0]);
+   // });
+
    const keys = [...'ABCDEFGHIJKLMNOPQRSTUVWXYZ'];
 
    const getRandomNumber = (min, max) => {
@@ -31,7 +50,8 @@ document.addEventListener('DOMContentLoaded', () => {
    let score = 0;
    let bestScore = localStorage.getItem('bestScore') || 0;
    const resultElement = document.querySelector('.result');
-   const bestScoreElement = document.querySelector('.result.best');
+   const bestScoreElement = document.querySelector('.best');
+   const timerElement = document.querySelector('.timer');
 
    bestScoreElement.innerHTML = `Ваш рекорд: ${bestScore}`;
 
@@ -40,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
       audio.play();
    };
 
-   document.addEventListener('keyup', (event) => {
+   const handleKeyUp = (event) => {
       const keyPressed = event.key.toUpperCase();
 
       if (!keys.includes(keyPressed)) return;
@@ -64,6 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
          } else {
             alert('Вы проиграли. Нажимайте внимательнее.');
             score = 0;
+            toggleScreen(screens[1], screens[0]);
          }
 
          resultElement.innerHTML = `Очки: ${score}`;
@@ -83,7 +104,45 @@ document.addEventListener('DOMContentLoaded', () => {
       };
 
       keyElement.addEventListener('animationend', handleAnimationEnd);
-   });
+   };
 
-   targetRandomKey();
+   const startGame = (isTimed) => {
+      score = 0;
+      resultElement.innerHTML = `Очки: ${score}`;
+      document.removeEventListener('keyup', handleKeyUp);
+      document.addEventListener('keyup', handleKeyUp);
+      targetRandomKey();
+
+      if (isTimed) {
+         timerElement.style.display = 'block';
+         startTimer();
+      } else {
+         timerElement.style.display = 'none';
+      }
+   };
+
+   const startTimer = () => {
+      let timeLeft = 60;
+      timerElement.innerHTML = `Время: ${timeLeft}s`;
+
+      const countdown = setInterval(() => {
+         timeLeft -= 1;
+         timerElement.innerHTML = `Время: ${timeLeft}s`;
+
+         if (timeLeft <= 0) {
+            clearInterval(countdown);
+            endGame();
+         }
+      }, 1000);
+   };
+
+   const endGame = () => {
+      alert(`Время истекло! Ваш счёт: ${score}`);
+      toggleScreen(screens[1], screens[0]);
+   };
+
+   function toggleScreen(screenToHide, screenToShow) {
+      screenToHide.classList.remove('visible');
+      screenToShow.classList.add('visible');
+   }
 });
