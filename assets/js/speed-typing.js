@@ -99,7 +99,7 @@ userInput.addEventListener('input', () => {
 backLinkButton.addEventListener('click', () => {
    const screens = document.querySelectorAll('.screen');
    screens.forEach((screen) => screen.classList.remove('visible'));
-   screens[0].classList.add('visible'); // Предполагается, что первая страница - это элемент screens[0]
+   screens[0].classList.add('visible');
 });
 
 // Инициализация
