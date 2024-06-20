@@ -1,22 +1,22 @@
 document.addEventListener('DOMContentLoaded', () => {
    const easyModeBtn = document.querySelector('#easy-mode'),
       hardModeBtn = document.querySelector('#hard-mode'),
+      wordModeBtn = document.querySelector('#word-mode'),
       screens = document.querySelectorAll('.screen');
-   // backBtn = document.querySelector('.back');
 
    easyModeBtn.addEventListener('click', () => {
       toggleScreen(screens[0], screens[1]);
-      startGame(false); // false means no time limit
+      startGame(false);
    });
 
    hardModeBtn.addEventListener('click', () => {
       toggleScreen(screens[0], screens[1]);
-      startGame(true); // true means time limit
+      startGame(true);
    });
 
-   // backBtn.addEventListener('click', () => {
-   //    toggleScreen(screens[1], screens[0]);
-   // });
+   wordModeBtn.addEventListener('click', () => {
+      toggleScreen(screens[0], screens[2]);
+   });
 
    const keys = [...'ABCDEFGHIJKLMNOPQRSTUVWXYZ'];
 

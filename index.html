@@ -29,6 +29,7 @@
 </head>
 
 <body>
+
     <div class="screen visible">
 
         <h1 class="title">Клавиатурный тренажёр</h1>
@@ -66,9 +67,6 @@
     </div>
 
     <div class="screen">
-        <!-- <div class="back">
-            <img src="assets/img/back.svg" alt="back">
-        </div> -->
 
         <div class="keyboard">
             <ul class="row row-0">
@@ -145,9 +143,36 @@
         <div class="timer subtitle">Время: 60s</div>
     </div>
 
+    <div class="screen">
+        <div class="typing-container">
+            <div class="typing-stats">
+                <p>Time: <span id="typing-timer">0s</span></p>
+                <p>Mistakes: <span id="typing-mistakes">0</span></p>
+            </div>
+
+            <div id="quote" onmousedown="return false" onselectstart="return false">
+
+            </div>
+
+            <textarea rows="3" name="" id="quote-input" placeholder="Type here when the test starts"></textarea>
+            <button id="start-test" onClick="startTest()">Start test</button>
+            <button id="stop-test" onClick="displayResult()">Stop test</button>
+
+            <div class="typing-result">
+                <h3>Result</h3>
+                <div class="typing-result-wrapper">
+                    <p>Accuracy: <span id="accuracy"></span></p>
+                    <p>Speed: <span id="wpm"></span></p>
+                </div>
+                <button id="back-link" class="back-button">Вернуться к выбору режима...</button>
+            </div>
+        </div>
+    </div>
+
     <audio id="keypress" src="./assets/sound/key-sound.mp3"></audio>
 
     <script src="assets/js/script.js"></script>
+    <script src="assets/js/speed-typing.js"></script>
 </body>
 
 </html>
