@@ -11,13 +11,11 @@ const quoteSection = document.querySelector('#quote'),
    wpmDisplay = document.querySelector('#wpm'),
    backLinkButton = document.querySelector('#back-link');
 
-// Переменные
-let quote = '';
-let time = 60;
-let timer;
-let mistakes = 0;
+let quote = '',
+   time = 60,
+   timer,
+   mistakes = 0;
 
-// Функции
 const renderNewQuote = async () => {
    try {
       const response = await fetch(quoteApiUrl);
@@ -69,7 +67,6 @@ const startTest = () => {
    userInput.focus();
 };
 
-// Слушатели событий
 userInput.addEventListener('input', () => {
    const quoteChars = document.querySelectorAll('.quote-char');
    let userInputChars = userInput.value.split('');
@@ -95,14 +92,12 @@ userInput.addEventListener('input', () => {
    }
 });
 
-// Обработчик события для кнопки возврата
 backLinkButton.addEventListener('click', () => {
    const screens = document.querySelectorAll('.screen');
    screens.forEach((screen) => screen.classList.remove('visible'));
    screens[0].classList.add('visible');
 });
 
-// Инициализация
 window.onload = () => {
    userInput.value = '';
    startTestButton.style.display = 'block';

@@ -146,23 +146,23 @@
     <div class="screen">
         <div class="typing-container">
             <div class="typing-stats">
-                <p>Time: <span id="typing-timer">0s</span></p>
-                <p>Mistakes: <span id="typing-mistakes">0</span></p>
+                <p>Время: <span id="typing-timer">0s</span></p>
+                <p>Ошибок: <span id="typing-mistakes">0</span></p>
             </div>
 
             <div id="quote" onmousedown="return false" onselectstart="return false">
 
             </div>
 
-            <textarea rows="3" name="" id="quote-input" placeholder="Type here when the test starts"></textarea>
-            <button id="start-test" onClick="startTest()">Start test</button>
-            <button id="stop-test" onClick="displayResult()">Stop test</button>
+            <textarea rows="3" name="" id="quote-input" placeholder="Печатайте тут, когда тест начнётся"></textarea>
+            <button id="start-test" onClick="startTest()">Начать тест</button>
+            <button id="stop-test" onClick="displayResult()">Закончить тест</button>
 
             <div class="typing-result">
                 <h3>Result</h3>
                 <div class="typing-result-wrapper">
-                    <p>Accuracy: <span id="accuracy"></span></p>
-                    <p>Speed: <span id="wpm"></span></p>
+                    <p>Аккуратность: <span id="accuracy"></span></p>
+                    <p>Скорость: <span id="wpm"></span></p>
                 </div>
                 <button id="back-link" class="back-button">Вернуться к выбору режима...</button>
             </div>
