@@ -4,17 +4,25 @@ document.addEventListener('DOMContentLoaded', () => {
       wordModeBtn = document.querySelector('#word-mode'),
       screens = document.querySelectorAll('.screen');
 
+   let playSound = false;
+
    easyModeBtn.addEventListener('click', () => {
+      playSound = true;
+
       toggleScreen(screens[0], screens[1]);
       startGame(false);
    });
 
    hardModeBtn.addEventListener('click', () => {
+      playSound = true;
+
       toggleScreen(screens[0], screens[1]);
       startGame(true);
    });
 
    wordModeBtn.addEventListener('click', () => {
+      playSound = false;
+
       toggleScreen(screens[0], screens[2]);
    });
 
@@ -73,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
          return;
       }
 
-      playKeySound();
+      playKeySound() ? playSound : '';
       keyElement.classList.add('hit');
 
       const handleAnimationEnd = () => {
